@@ -1,0 +1,50 @@
+# =====================================================================
+#  Nang Delivery Brisbane — WordPress repo .gitignore
+#  We version OUR code (custom theme), the media uploads, and the deploy
+#  kit. WordPress core and the wp.org plugins are re-installed on the
+#  server (they must be updated via WordPress, never via git), and all
+#  secrets / build scaffolding stay out of the repo.
+# =====================================================================
+
+# ---- Secrets — NEVER commit -----------------------------------------
+/wp-config.php
+*.key
+*.pem
+# Database dumps contain the admin email + password hash — transfer them
+# separately (see deploy/DEPLOY.md Step 6), never via a (public) repo.
+/deploy/db/*.sql
+
+# ---- WordPress core (re-downloaded on the server) -------------------
+/wp-admin/
+/wp-includes/
+/index.php
+/wp-*.php
+/xmlrpc.php
+/license.txt
+/readme.html
+
+# ---- Third-party plugins (reinstall from wp.org — see deploy/DEPLOY.md)
+/wp-content/plugins/
+
+# ---- Only our theme is versioned; ignore any default/other themes ---
+/wp-content/themes/*
+!/wp-content/themes/nangdelivery/
+
+# ---- Drop-ins, caches, generated ------------------------------------
+/wp-content/upgrade/
+/wp-content/cache/
+/wp-content/advanced-cache.php
+/wp-content/object-cache.php
+/wp-content/debug.log
+/wp-content/uploads/**/cache/
+
+# ---- Build scaffolding & project tooling (not for production) -------
+/_build/
+/.claude/
+
+# ---- OS / editor junk -----------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*~
+*.log
